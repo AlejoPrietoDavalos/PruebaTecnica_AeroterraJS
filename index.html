@@ -1,0 +1,54 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>Prueba Técnica Aeroterra JS</title>
+    
+    <link rel="stylesheet" href="normalize.css">
+
+    <link rel="stylesheet" href="https://js.arcgis.com/4.23/esri/themes/light/main.css">
+    <script src="https://js.arcgis.com/4.23/"></script>
+    
+    
+    <link rel="stylesheet" href="style.css">
+    <script src="index.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <aside class="formAddPoint hidden">
+        <div>
+          <h4>Complete para añadir un nuevo punto</h4>
+          <form>
+            <label for="POI" class="labels_formAddPoint">Nombre del Punto de Interés</label>
+            <input type="text" id="POI" class="dataForm" placeholder="Ej: Mi nuevo lugar de trabajo">
+            
+            <label for="Direction" class="labels_formAddPoint">Dirección</label>
+            <input type="text" id="Direction" class="dataForm" placeholder="Ej: Av. E. Madero 1020">
+            
+            <label for="Phone" class="labels_formAddPoint">Teléfono</label>
+            <input type="number" id="Phone" class="dataForm" placeholder="Ej: 54 9 11 5272 0900">             <!--Sacar las flechitas de aumentar y disminuir-->
+
+            <label for="Category" class="labels_formAddPoint">Categoría</label>
+            <select id="Category" class="dataForm">                                                           <!--Cambiar el color rojo del background cuando paso el mouse por encima-->
+              <option value="Not Choose">Seleccione una categoría</option>
+              <option value="Comercial">Comercial</option>
+              <option value="Residencial">Residencial</option>
+              <option value="Mixta">Mixta</option>
+            </select>
+            
+            <label for="Longitude" class="labels_formAddPoint">Longitud</label>
+            <input type="number" id="Longitude" class="dataForm" placeholder="Número entre: [-180,180]" min="-180" max="180"> <!--Sacar las flechitas de aumentar y disminuir-->
+
+            <label for="Latitude" class="labels_formAddPoint">Latitud</label>                                     
+            <input type="number" id="Latitude" class="dataForm" placeholder="Número entre: [-90,90]" min="-90" max="90">      <!--Sacar las flechitas de aumentar y disminuir-->
+
+
+            <button type="submit" id="submitButton" class="buttonAddPoint">Añadir punto</button>                              <!--Aplicar un :hover.-->
+          </form>
+        </div>
+      </aside>
+      
+      <div id="viewMap"></div>
+    </div>
+  </body>
+</html>

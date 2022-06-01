@@ -1,0 +1,62 @@
+.container {
+    height: 100%;
+    width: 100%;
+}
+
+#viewMap {
+    height: 100%;
+    width: auto;
+}
+
+.formAddPoint {
+    height: 100%;
+    width: 440px;
+    padding: 30px;
+    background: #45237D;
+    border-radius: 4px;
+    font-family: 'Calibri';
+    color: white;
+    float: left;
+    background-color: #6E2C9C;
+    display: flex;
+    align-items: center;
+}
+
+/*  Crear boton para ocultar y desocultar el formulario.
+.hidden {
+    display: none;
+}
+*/
+
+.formAddPoint h4 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.dataForm {
+    width: 100%;
+    background: #45237D;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    border: 1px solid #6D89C7;
+    font-family: 'Calibri';
+    font-size: 18px;
+    color:white
+}
+
+.buttonAddPoint {
+    width: 100%;
+    background: #A520B4;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    border: 1px solid #6D89C7;
+    font-family: 'Calibri';
+    font-size: 22px;
+}
+
+.labels_formAddPoint {
+    font-size: 20px;
+}
