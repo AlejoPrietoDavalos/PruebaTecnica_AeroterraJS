@@ -24,89 +24,97 @@ require(
         container: "viewMap"
     });
 
+    // -------------------------- FORMULARIO --------------------------
+    const formSelector = document.querySelector("#form");
+    formSelector.addEventListener('submit', CreatePoint);
+    
+    var formValues = {                      // Se almacenan los valores del formulario.
+        "POI": null,
+        "Direction": null,
+        "Phone": null,
+        "Category": null,
+        "Longitude": null,
+        "Latitude": null
+    }
+
+    const categoryColorPoint = {            // Dada una categoría, se setea el color del punto.
+        "Comercial": [137, 10, 29],         // Bordó.
+        "Residencial": [117, 89, 213],      // Violeta.
+        "Mixta": [71, 162, 184]             // Azul marino.
+    }
 
     // -------------------------- PUNTO --------------------------
     const point_layer = new GraphicsLayer();
     map.add(point_layer);
 
-    function CreatePoint(point_layer, longitude, latitude){
-        const geometry = {                      //Create a point
+    
+    function GetFormValues(){
+        formValues["POI"] = formSelector.POI.value;
+        formValues["Direction"] = formSelector.Direction.value;
+        formValues["Phone"] = formSelector.Phone.value;
+        formValues["Category"] = formSelector.Category.value;
+        formValues["Longitude"] = formSelector.Longitude.value;
+        formValues["Latitude"] = formSelector.Latitude.value;
+    }
+
+    function SetFormValuesDefault(){
+        formSelector.POI.value = "";
+        formSelector.Direction.value = "";
+        formSelector.Phone.value = "";
+        formSelector.Category.value = "";
+        formSelector.Longitude.value = "";
+        formSelector.Latitude.value = "";
+    }
+
+    function SetDescriptionPoint(){
+        let description = "";
+        // Poner la lógica para agregar una descripción ignorando los valores opcionales en caso de que no fueran rellenados.
+        return description;
+    }
+    
+    function CreatePoint(event){
+        event.preventDefault();
+
+        GetFormValues();
+
+        let colorPoint = categoryColorPoint[formValues["Category"]];    // El color del punto depende de la categoría de éste.
+        let descriptionPoint = SetDescriptionPoint();
+        
+
+        const geometry = {                                              // Se agrega el punto en las coordenadas especificadas.
             type: "point",
-            longitude: longitude,
-            latitude: latitude
+            longitude: parseFloat(formValues["Longitude"]),
+            latitude: parseFloat(formValues["Latitude"])
         };
 
-        const point_style = {   //########### Poner un color u otro dependiendo de la categoria
+        const point_style = {                                           // Se agrega color y estilo al punto.
             type: "simple-marker",
-            color: [226, 119, 40],              // Orange
+            color: colorPoint,
             outline: {
-                color: [255, 255, 255],         // White
+                color: [255, 255, 255],
                 width: 1
             }
         };
 
-        const attributes = {
-            Name: "Graphic",
-            Description: "I am a polygon"
-        }
-
-        const popupTemplate = {
+        const popupTemplate = {                                         // Template del Popup de la descripción del punto.
             title: "{Name}",
             content: "{Description}"
-        }
+        };
 
-        const pointGraphic = new Graphic({
+        const attributes = {                                            // Contenido del Popup de la descripción del punto.
+            Name: formValues["POI"],
+            Description: descriptionPoint
+        };
+
+        const pointGraphic = new Graphic({                              // Se crea el gráfico del punto con todos los elementos definidos anteriormente.
             geometry: geometry,
             symbol: point_style,
             attributes: attributes,
             popupTemplate: popupTemplate
         });
 
-        // Agrego el punto al gráfico
+        // Agrego el punto al gráfico y seteo los valores del formulario a predeterminado.
         point_layer.add(pointGraphic);
+        SetFormValuesDefault();
     }
-
-    CreatePoint(point_layer,-58.3724715,-34.595986)
-    
-
-    
-
-    
-
-    
-
-
-    //const submit_button = document.getElementById("submit_button")
-
-
-    //submit_button.addEventListener("submit", AddPoint())
-    function AddPoint(name, direccion, telefono, categoria, longitude, latitude){
-    //const AddPoint = (name, direccion, telefono, categoria, longitude, latitude)=>{
-
-        //--- Verificacion ---
-        
-        //--- Verificacion ---
-
-        let atributos = {
-            nombre : name,
-            direccion : direccion,
-            telefono: telefono,
-            categoria: categoria
-        };
-
-        let point = new Graphic({
-            geometry: {
-                type: "point",
-                longitude: longitude,
-                latitude: latitude
-            },
-            symbol: point_style,
-            attributes: atributos
-        })
-
-        point_layer.add(point);
-    };
-
-    // -------------------------- PopUp ------------------
-    
 });
