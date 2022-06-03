@@ -38,7 +38,7 @@ require(
      * Y en "pointGraphicObject" el objeto pointGraphic que lo necesitamos para luego
      * poder removerlo en caso de que el usuario quisiera borrar el punto agregado.*/
     var addedPoints = {
-        "LastIDUsed": null,
+        "LastIDUsed": -1,       // El primer objeto tomará el ID=0, ya que se le suma 1 antes de asignarle un ID.
         "ID": [],
         "description": [],
         "pointGraphicObject": []
@@ -94,13 +94,8 @@ require(
         });
 
         // Agrego la descripción y el objeto punto para poder removerlo eventualmente, si el usuario quisiera.
-        if (addedPoints["LastIDUsed"]==null){
-            addedPoints["LastIDUsed"] = 0;
-            addedPoints["ID"].push(addedPoints["LastIDUsed"])
-        }else{
-            addedPoints["LastIDUsed"] += 1;
-            addedPoints["ID"].push(addedPoints["LastIDUsed"])
-        }
+        addedPoints["LastIDUsed"] += 1;
+        addedPoints["ID"].push(addedPoints["LastIDUsed"])
         addedPoints["description"].push(descriptionPoint)
         addedPoints["pointGraphicObject"].push(pointLayer)
         
