@@ -56,6 +56,10 @@
     font-size: 22px;
 }
 
+.buttonAddPoint:hover {
+    background: #c143cf;
+}
+
 .labels_formAddPoint {
     font-size: 20px;
 }
@@ -66,3 +70,10 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }
+
+.formAddPoint h4::selection,
+label::selection,
+input::selection {
+    background: #934fc4;
+}
+
