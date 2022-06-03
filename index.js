@@ -29,8 +29,20 @@ require(
         container: "viewMap"
     });
 
-    const point_layer = new GraphicsLayer();                    // Se crea una capa de puntos.
-    map.add(point_layer);                                       // Y se agrega al mapa.
+    const pointLayer = new GraphicsLayer();                     // Se crea una capa de puntos.
+    map.add(pointLayer);                                        // Y se agrega al mapa.
+
+
+    /**Generamos un ID único para cada punto, para poder identificarlos.
+     * Almacenamos en "description" la descripción del punto, para poder discriminarlo del resto de puntos.
+     * Y en "pointGraphicObject" el objeto pointGraphic que lo necesitamos para luego
+     * poder removerlo en caso de que el usuario quisiera borrar el punto agregado.*/
+    var addedPoints = {
+        "LastIDUsed": null,
+        "ID": [],
+        "description": [],
+        "pointGraphicObject": []
+    };
 
     // -------------------------- FORMULARIO --------------------------
     const formSelector = document.querySelector("#form");
@@ -40,8 +52,8 @@ require(
     /**Crea un punto en el mapa en la ubicación dada por el usuario.
      * El color del punto depende de la categoría, y contiene un Pop-up
      * con la información del formulario.*/
-    function CreatePoint(event){
-        event.preventDefault();
+    function CreatePoint(e){
+        e.preventDefault();
         
         GetFormValues(formSelector);
 
@@ -81,8 +93,40 @@ require(
             popupTemplate: popupTemplate
         });
 
+        // Agrego la descripción y el objeto punto para poder removerlo eventualmente, si el usuario quisiera.
+        if (addedPoints["LastIDUsed"]==null){
+            addedPoints["LastIDUsed"] = 0;
+            addedPoints["ID"].push(addedPoints["LastIDUsed"])
+        }else{
+            addedPoints["LastIDUsed"] += 1;
+            addedPoints["ID"].push(addedPoints["LastIDUsed"])
+        }
+        addedPoints["description"].push(descriptionPoint)
+        addedPoints["pointGraphicObject"].push(pointLayer)
+        
         // Agrego el punto al gráfico y seteo los valores del formulario a predeterminado.
-        point_layer.add(pointGraphic);
+        pointLayer.add(pointGraphic);
         SetFormValuesDefault(formSelector);
+    }
+
+
+    /**Recibe como parámetro el ID del punto a remover, y la capa de puntos del mapa.
+     * Remueve dicho punto, y lo elimina del registro de puntos "addedPoints".
+     * 
+     * @param {int} ID Identificador único del punto.
+     * @param {object} pointLayer Capa de puntos del mapa.
+     * @param {object} addedPoints Registro de los puntos existentes en el mapa.
+     */
+    function RemovePointByID(ID, pointLayer, addedPoints){
+        let indexPoint = addedPoints["ID"].indexOf(ID);
+        
+        if (indexPoint != -1){
+            pointLayer.remove(addedPoints["pointGraphicObject"][indexPoint]);       // Se elimina el punto del mapa.
+            addedPoints["ID"].splice(indexPoint);
+            addedPoints["description"].splice(indexPoint);
+            addedPoints["pointGraphicObject"].splice(indexPoint);
+        }else{
+            console.log("Arrojar una excepción, no se cual es la manera correcta en JS.")
+        }   
     }
 });
