@@ -59,3 +59,10 @@
 .labels_formAddPoint {
     font-size: 20px;
 }
+
+/* Me robé esto de google, parece que funciona.
+Chrome, Safari, Edge, Opera*/
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}

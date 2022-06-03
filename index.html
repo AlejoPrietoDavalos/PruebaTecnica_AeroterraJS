@@ -26,7 +26,7 @@
             <input type="text" id="Direction" name="Direction" class="dataForm" placeholder="Ej: Av. E. Madero 1020" required>
             
             <label for="Phone" class="labels_formAddPoint">Teléfono (Opcional)</label>
-            <input type="number" id="Phone" name="Phone" class="dataForm" placeholder="Ej: 54 9 11 5272 0900">             <!--Sacar las flechitas de aumentar y disminuir-->
+            <input type="number" id="Phone" name="Phone" class="dataForm" placeholder="Ej: 54 9 11 5272 0900">
 
             <label for="Category" class="labels_formAddPoint">Categoría</label>
             <select id="Category" name="Category" class="dataForm" required>                                               <!--Cambiar el color rojo del background cuando paso el mouse por encima-->
@@ -38,11 +38,11 @@
             
             <label for="Longitude" class="labels_formAddPoint">Longitud</label>
             <input type="number" id="Longitude" name="Longitude" class="dataForm" placeholder="Número entre: [-180,180]" min="-180" max="180" step="0.0000001" required>
-            <!--Sacar las flechitas de aumentar y disminuir / Agrego un Step=10**-7, no se cual es la precisión necesaria en la medida pero el PDF tiene hasta 7 decimales-->
+            <!--Agrego un Step=10**-7, no se cual es la precisión necesaria en la medida pero el PDF tiene hasta 7 decimales-->
             
             <label for="Latitude" class="labels_formAddPoint">Latitud</label>
             <input type="number" id="Latitude" name="Latitude" class="dataForm" placeholder="Número entre: [-90,90]" min="-90" max="90" step="0.0000001" required>
-            <!--Sacar las flechitas de aumentar y disminuir / Agrego un Step=10**-7, no se cual es la precisión necesaria en la medida pero el PDF tiene hasta 7 decimales-->
+            <!--Agrego un Step=10**-7, no se cual es la precisión necesaria en la medida pero el PDF tiene hasta 7 decimales-->
 
             <button type="submit" id="submitButton" name="submitButton" class="buttonAddPoint">Añadir punto</button>            <!--Aplicar un :hover.-->
           </form>
