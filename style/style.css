@@ -21,12 +21,6 @@
     align-items: center;
 }
 
-/*  Crear boton para ocultar y desocultar el formulario.
-.hidden {
-    display: none;
-}
-*/
-
 .formAddPoint h4 {
     font-size: 24px;
     margin-bottom: 20px;
